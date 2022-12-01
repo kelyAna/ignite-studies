@@ -1,0 +1,44 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "description": "Desenvolvimento de software",
+      "type": "income",
+      "category": "Venda",
+      "price": 14000,
+      "createdAt": "2022-11-30T12:03:24.638Z"
+    },
+    {
+      "id": 2,
+      "description": "Hamburguer",
+      "type": "outcome",
+      "category": "Alimentação",
+      "price": 50,
+      "createdAt": "2022-11-30T18:03:24.638Z"
+    },
+    {
+      "id": 3,
+      "description": "Pão",
+      "type": "outcome",
+      "category": "Alimentação",
+      "price": 40,
+      "createdAt": "2022-11-30T18:03:24.638Z"
+    },
+    {
+      "description": "Banho de pet",
+      "price": 200,
+      "category": "Saúde",
+      "type": "income",
+      "createdAt": "2022-12-01T14:39:47.732Z",
+      "id": 4
+    },
+    {
+      "description": "Creatina",
+      "price": 100,
+      "category": "Suplementação",
+      "type": "outcome",
+      "createdAt": "2022-12-01T18:38:21.065Z",
+      "id": 5
+    }
+  ]
+}
