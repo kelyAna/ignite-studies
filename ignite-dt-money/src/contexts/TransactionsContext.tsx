@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { api } from '../lib/axios'
 import * as z from 'zod'
+import { createContext } from 'use-context-selector'
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -36,7 +37,7 @@ export const TransactionsProvider = ({
 }: TransactionProviderProps) => {
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
-  async function getTransactions(query?: string) {
+  const getTransactions = useCallback(async (query?: string) => {
     const response = await api.get('transactions', {
       params: {
         _sort: 'createdAt',
@@ -46,25 +47,27 @@ export const TransactionsProvider = ({
     })
 
     setTransactions(response.data)
-  }
+  }, [])
 
-  async function createTransaction(data: CreateTransactionInputs) {
-    const { description, price, category, type } = data
+  const createTransaction = useCallback(
+    async (data: CreateTransactionInputs) => {
+      const { description, price, category, type } = data
 
-    const response = await api.post('transactions', {
-      description,
-      price,
-      category,
-      type,
-      createdAt: new Date(),
-    })
+      const response = await api.post('transactions', {
+        description,
+        price,
+        category,
+        type,
+        createdAt: new Date(),
+      })
 
-    setTransactions((state) => [...state, response.data])
-  }
-
+      setTransactions((state) => [...state, response.data])
+    },
+    [],
+  )
   useEffect(() => {
     getTransactions()
-  }, [])
+  }, [getTransactions])
 
   return (
     <TransactionsContext.Provider
